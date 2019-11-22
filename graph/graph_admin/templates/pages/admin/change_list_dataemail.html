@@ -1,0 +1,235 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="/static/echarts.min.js"></script>
+
+
+<!-- prepare a DOM container with width and height -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                    <div class="col-md-12">
+                        <h3 style="text-decoration:underline;color:black" class="text-center mb-5">Status</h3>
+                        <table class="table ">
+                            <tbody>
+                                <tr>
+                                <th>Active</th>
+                                    <td>55</td>
+                                </tr>
+                                <tr>
+                                <th>Deactive</th>
+                                    <td>45</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6"><div id="barstatus" style="width: 100%;height:400px;"></div></div>
+                    <div class="col-md-6"><div id="piestatus" style="width: 100%;height:400px;"></div></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 style="text-decoration:underline;color:black" class="text-center mb-5">Genre</h3>
+                    <table class="table ">
+                        <tbody>
+                            <tr>
+                            <th>H</th>
+                                <td>55</td>
+                            </tr>
+                            <tr>
+                            <th>F</th>
+                                <td>45</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                        <div id="piegenre" style="width: 100%;height:400px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 style="text-decoration:underline;color:black" class="text-center mb-5">Nan Plus</h3>
+                    <table class="table ">
+                        <tbody>
+                            <tr>
+                            <th>+</th>
+                                <td>55</td>
+                            </tr>
+                            <tr>
+                            <th>-</th>
+                                <td>45</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12"><div id="pienanplus" style="width: 100%;height:400px;"></div></div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
+<hr><br>
+
+<script type="text/javascript">
+    // based on prepared DOM, initialize echarts instance
+    var myBarChart = echarts.init(document.getElementById('barstatus'));
+    var mypiestatus = echarts.init(document.getElementById('piestatus'));
+    var piegenre = echarts.init(document.getElementById('piegenre'));
+    var pienanplus = echarts.init(document.getElementById('pienanplus'));
+    // specify chart configuration item and data
+    var optionBarStatus =  {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {show: false},
+                data: ['Active', 'Deactive']
+            }
+        ],
+        yAxis:{
+                type: 'value'
+            }
+        ,
+        series: [
+            {   
+                name:"Homme",
+                data: [120,29],
+                type: 'bar'
+            },
+            {
+                name:"Femme",
+                data: [15,198],
+                type: 'bar'
+            }
+        ]
+    };
+    var optionPieStatus = {
+        title : {
+            text: 'titre',
+            subtext: 'sous - titre',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['True','False']
+        },
+        series : [
+            {
+                name: 'Status',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {name:'True',value:45},
+                    {name:'False',value:55}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    var optionpiegenre = {
+        title : {
+            text: 'titre',
+            subtext: 'sous - titre',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['True','False']
+        },
+        series : [
+            {
+                name: 'Status',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {name:'True',value:45},
+                    {name:'False',value:55}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    var optionpienanplus = {
+        title : {
+            text: 'titre',
+            subtext: 'sous - titre',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['True','False']
+        },
+        series : [
+            {
+                name: 'Status',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {name:'True',value:45},
+                    {name:'False',value:55}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    // use configuration item and data specified to show chart
+    myBarChart.setOption(optionBarStatus);
+    mypiestatus.setOption(optionPieStatus);
+    piegenre.setOption(optionpiegenre);
+    pienanplus.setOption(optionpienanplus);
+</script>
+
+<!-- Render the rest of the ChangeList view by calling block.super -->
+{{ block.super }}
+{% endblock %}
